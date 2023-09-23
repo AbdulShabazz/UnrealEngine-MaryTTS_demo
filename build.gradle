@@ -1,0 +1,24 @@
+plugins {
+    id 'base'
+}
+
+allprojects {
+    group 'de.dfki.mary'
+    version '5.3-SNAPSHOT'
+
+    repositories {
+        jcenter()
+    }
+}
+
+apply from: 'applicationLogic.gradle'
+apply from: 'publishLogic.gradle'
+
+components.java {
+    withVariantsFromConfiguration(configurations.sourcesElements) {
+        skip()
+    }
+    withVariantsFromConfiguration(configurations.javadocElements) {
+        skip()
+    }
+}

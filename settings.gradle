@@ -1,0 +1,18 @@
+pluginManagement {
+    plugins {
+        id 'de.dfki.mary.component' version '0.2'
+    }
+}
+include 'marytts-common'
+include 'marytts-languages:marytts-lang-de'
+include 'marytts-languages:marytts-lang-en'
+include 'marytts-languages:marytts-lang-fr'
+include 'marytts-languages:marytts-lang-it'
+include 'marytts-languages:marytts-lang-lb'
+include 'marytts-languages:marytts-lang-ru'
+include 'marytts-languages:marytts-lang-sv'
+include 'marytts-languages:marytts-lang-te'
+include 'marytts-languages:marytts-lang-tr'
+include 'marytts-runtime'
+include 'marytts-signalproc'
+include 'voice-cmu-slt-hsmm'

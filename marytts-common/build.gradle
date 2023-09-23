@@ -1,0 +1,21 @@
+apply from: "$rootDir/buildLogic.gradle"
+apply from: "$rootDir/testLogic.gradle"
+apply from: "$rootDir/publishLogic.gradle"
+
+dependencies {
+    api libs.commonsIo
+    api libs.commonsLang
+    api libs.log4jCore
+    testImplementation libs.testng
+}
+
+processResources {
+    filesMatching '**/specification-version.txt', {
+        expand project.properties
+    }
+}
+
+test {
+    useTestNG()
+    systemProperty 'version', version
+}
