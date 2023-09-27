@@ -1,0 +1,2 @@
+TODO: Improve cross-fade quality between phones (by increasing frame resolution) to improve prosody
+TODO: Add respeecher support for (offline) voice-mapping
