@@ -1,0 +1,3 @@
+- .JAR files are OS portable JAVA runtime executables
+- .JAVA files are sourcecode files for most of the APIs
+- .VOICE files contain lang-specific phones-, accent-, 
