@@ -1,0 +1,7 @@
+SYMP: gradlew.bat - Error unsupported class file major version 64
+SOLU: 
+	1. Download the latest Java Development Kit (JDK)
+	2. command prompt:$ java -jar C:Downloads\jdk-[latest]_windows-x64_bin.exe
+
+SYMP: gradlew.bat - Error unsupported class file major version 65
+SOLU: 
