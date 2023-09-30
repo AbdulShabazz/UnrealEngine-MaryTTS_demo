@@ -1,5 +1,6 @@
+FILES
 - .JAR files are OS portable JAVA runtime executables
-- .JAVA files are sourcecode files for most of the APIs
-- .VOICE files contain lang-specific phones-, accent-, 
-- .GROOVY files (compare .bat)
-- .GRADLE files (compare cmake)
+- .JAVA files are sourcecode access files for most of the APIs
+- .VOICE files contain lang-specific phones-, accent-
+- .GROOVY files (cf. .bat files)
+- .GRADLE files (cf. cmake)
