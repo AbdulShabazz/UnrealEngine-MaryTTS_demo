@@ -75,19 +75,18 @@ public abstract class FrameBasedAnalyser<T> extends FrameProvider {
 	 *
 	 * @return an array containing all frame analysis results.
 	 */
-        @SuppressWarnings("unckecked")
-	public FrameAnalysisResult<T>[] analyseAllFrames() {
-		if (analysisResults == null) {
-			ArrayList<FrameAnalysisResult<T>> results = new ArrayList<FrameAnalysisResult<T>>();
-			FrameAnalysisResult<T> oneResult;
-			while ((oneResult = analyseNextFrame()) != null) {
-				results.add(oneResult);
-			}
-			FrameAnalysisResult<T>[] arr = new FrameAnalysisResult[results.size()];
-			analysisResults = (FrameAnalysisResult<T>[]) results.toArray(arr);
+@SuppressWarnings("unchecked")
+public FrameAnalysisResult<T>[] analyseAllFrames() {
+	if (analysisResults == null) {
+		ArrayList<FrameAnalysisResult<T>> results = new ArrayList<>();
+		FrameAnalysisResult<T> oneResult;
+		while ((oneResult = analyseNextFrame()) != null) {
+			results.add(oneResult);
 		}
-		return analysisResults;
+		analysisResults = results.toArray(new FrameAnalysisResult[0]);
 	}
+	return analysisResults;
+}
 
 	/**
 	 * Analyse the currently available input signal as frames. This method is intended for live signals such as microphone data.
@@ -97,18 +96,18 @@ public abstract class FrameBasedAnalyser<T> extends FrameProvider {
 	 * @return an array containing the frame analysis results for the data that is currently available, or an empty array if no
 	 *         new data is available.
 	 */
-        @SuppressWarnings("unckecked")
-	public FrameAnalysisResult<T>[] analyseAvailableFrames() {
-		List<FrameAnalysisResult<T>> results = new ArrayList<FrameAnalysisResult<T>>();
-		FrameAnalysisResult<T> oneResult;
-		while (signal.available() >= frameLength) {
-			oneResult = analyseNextFrame();
-			assert oneResult != null;
-			results.add(oneResult);
-		}
-		FrameAnalysisResult[] arr = new FrameAnalysisResult[results.size()];
-		return (FrameAnalysisResult<T>[]) results.toArray(arr);
+@SuppressWarnings("unchecked")
+public FrameAnalysisResult<T>[] analyseAvailableFrames() {
+	List<FrameAnalysisResult<T>> results = new ArrayList<>();
+	FrameAnalysisResult<T> oneResult;
+	while (signal.available() >= frameLength) {
+		oneResult = analyseNextFrame();
+		assert oneResult != null;
+		results.add(oneResult);
 	}
+	FrameAnalysisResult<T>[] arr = results.toArray(new FrameAnalysisResult[0]);
+	return arr;
+}
 
 	/**
 	 * Apply this FrameBasedAnalyser to the given data.
