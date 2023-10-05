@@ -1,5 +1,14 @@
 plugins {
-    id 'base'
+    id 'java'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+    withSourcesJar()
+    withJavadocJar()
+    skip()
 }
 
 allprojects {
@@ -7,18 +16,9 @@ allprojects {
     version '5.3-SNAPSHOT'
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply from: 'applicationLogic.gradle'
 apply from: 'publishLogic.gradle'
-
-components.java {
-    withVariantsFromConfiguration(configurations.sourcesElements) {
-        skip()
-    }
-    withVariantsFromConfiguration(configurations.javadocElements) {
-        skip()
-    }
-}
