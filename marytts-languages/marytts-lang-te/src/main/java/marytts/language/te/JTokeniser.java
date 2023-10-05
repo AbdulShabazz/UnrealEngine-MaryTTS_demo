@@ -43,8 +43,8 @@ public class JTokeniser extends marytts.modules.JTokeniser {
      * 
      */
 	public JTokeniser() {
-		super(MaryDataType.RAWMARYXML, MaryDataType.TOKENS, new Locale("te"));
-		setTokenizerLanguage("en");
+		super(MaryDataType.RAWMARYXML, MaryDataType.TOKENS, new Locale.Builder().setLanguage("te").build());
+		setTokenizerLanguage(Locale.ENGLISH.getLanguage());
 	}
 
 	public MaryData process(MaryData d) throws Exception {
