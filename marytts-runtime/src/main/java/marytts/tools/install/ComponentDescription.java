@@ -29,8 +29,9 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -139,9 +140,10 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 		this.description = descriptionElement.getTextContent().trim();
 		Element licenseElement = (Element) xmlDescription.getElementsByTagName("license").item(0);
 		try {
-			this.license = new URL(licenseElement.getAttribute("href").trim().replaceAll(" ", "%20"));
-		} catch (MalformedURLException mue) {
-			new Exception("Invalid license URL -- ignoring", mue).printStackTrace();
+			this.license = new URL(new URI(licenseElement.getAttribute("href").trim().replaceAll(" ", "%20")).toASCIIString());
+		} catch (URISyntaxException | MalformedURLException e) {
+			e.printStackTrace();
+			System.err.println("Invalid license URL -- ignoring");
 			this.license = null;
 		}
 		Element packageElement = (Element) xmlDescription.getElementsByTagName("package").item(0);
@@ -164,9 +166,15 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 					}
 					urlString += packageFilename;
 				}
-				locations.add(new URL(urlString));
+				try {
+					locations.add(new URL(new URI(urlString.replaceAll(" ", "%20")).toASCIIString()));
+				} catch (URISyntaxException | MalformedURLException e) {
+					e.printStackTrace();
+					throw new MalformedURLException("Invalid license URL -- ignoring");
+				}
 			} catch (MalformedURLException mue) {
-				new Exception("Invalid location -- ignoring", mue).printStackTrace();
+				mue.printStackTrace();
+				System.err.println("Invalid license URL -- ignoring");
 			}
 		}
 		archiveFile = new File(System.getProperty("mary.downloadDir"), packageFilename);
@@ -841,16 +849,17 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 							// is existing file newer?
 							boolean existingIsNewer = false;
 							try {
-								// existing JAR:
-								JarFile existingJar = new JarFile(newFile);
-								Manifest existingManifest = existingJar.getManifest();
-								String existingVersion = existingManifest.getMainAttributes().getValue("Specification-Version");
-								// packaged JAR:
-								JarInputStream packagedJar = new JarInputStream(zipfile.getInputStream(entry));
-								Manifest packagedManifest = packagedJar.getManifest();
-								String packagedVersion = packagedManifest.getMainAttributes().getValue("Specification-Version");
-								// compare the version strings:
-								existingIsNewer = isVersionNewerThan(existingVersion, packagedVersion);
+								try (// existing JAR:
+								JarFile existingJar = new JarFile(newFile)) {
+									Manifest existingManifest = existingJar.getManifest();
+									String existingVersion = existingManifest.getMainAttributes().getValue("Specification-Version");
+									// packaged JAR:
+									JarInputStream packagedJar = new JarInputStream(zipfile.getInputStream(entry));
+									Manifest packagedManifest = packagedJar.getManifest();
+									String packagedVersion = packagedManifest.getMainAttributes().getValue("Specification-Version");
+									// compare the version strings:
+									existingIsNewer = isVersionNewerThan(existingVersion, packagedVersion);
+								}
 								if (existingIsNewer) {
 									// if we don't overwrite a newer existing JAR, then never log it as installed, otherwise we
 									// lose it during uninstall!
