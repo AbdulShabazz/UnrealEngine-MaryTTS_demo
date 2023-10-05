@@ -1,7 +1,11 @@
 SYMP: gradlew.bat - Error unsupported class file major version 64
 SOLU: 
-	1. Download the latest Java Development Kit (JDK)
+	1. Download the latest Java 21 Development Kit (JDK)
 	2. command prompt:$ java -jar C:Downloads\jdk-[latest]_windows-x64_bin.exe
 
 SYMP: gradlew.bat - Error unsupported class file major version 65
 SOLU: 
+	1. Download the latest Gradle 8.3 Development Kit (GDK)
+	2. Add bin/gradle to PATH
+
+SYMP: build.gradle:2 Plugin [id: 'de.dfki.mary.component', version: '0.2'] was not found in any of the following sources:
