@@ -12,6 +12,7 @@ allprojects {
     version '5.3-SNAPSHOT'
 
     repositories {
+        jcenter()
         mavenCentral()
     }
 }
