@@ -57,6 +57,8 @@ By using the option `--info`, you set the logger of `gradle` *AND* MaryTTS at th
 
 It is also possible to set the MaryTTS logger level to `INFO` or `DEBUG` by defining the system variable `log4j.logger.marytts`.
 
+RECOMMENDATION: Although the gradlew wrapper for gradle is provided as a convenience with each non Linux distribution, the Warning(s) and Error(s) messages are of little use, so it is recommended to always install the latest GRADLE oem distribution as well as update to the latest JAVA.
+
 ## Downloading and installing voices
 
 Run `./gradlew runInstallerGui` to start an installer GUI to download and install more voices.
