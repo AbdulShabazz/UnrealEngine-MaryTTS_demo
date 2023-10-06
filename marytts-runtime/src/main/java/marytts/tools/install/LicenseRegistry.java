@@ -30,6 +30,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,12 +111,18 @@ public class LicenseRegistry {
 							+ localLicenseFile.getAbsolutePath() + ", but that file cannot be read. Skipping.");
 					continue;
 				}
-				URL remoteURL = new URL(remoteURLString);
-				remote2local.put(remoteURL, localFilename);
+				try{
+					URI remoteUri = new URI(remoteURLString);
+					URL remoteURL = remoteUri.toURL();
+					remote2local.put(remoteURL, localFilename);
+				} catch (URISyntaxException | MalformedURLException e) {
+					e.printStackTrace();
+					throw new MalformedURLException("Invalid license URL:");
+				}
 			}
 		} catch (IOException e) {
-			System.err.println("Problem reading local license index file " + licenseIndexFile.getAbsolutePath() + ":");
 			e.printStackTrace();
+			System.err.println("Problem reading local license index file " + licenseIndexFile.getAbsolutePath() + ":");
 		}
 	}
 
