@@ -140,7 +140,7 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 		this.description = descriptionElement.getTextContent().trim();
 		Element licenseElement = (Element) xmlDescription.getElementsByTagName("license").item(0);
 		try {
-			this.license = new URL(new URI(licenseElement.getAttribute("href").trim().replaceAll(" ", "%20")).toASCIIString());
+			this.license = new URI(licenseElement.getAttribute("href").trim()).toURL();
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 			System.err.println("Invalid license URL -- ignoring");
@@ -167,10 +167,10 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 					urlString += packageFilename;
 				}
 				try {
-					locations.add(new URL(new URI(urlString.replaceAll(" ", "%20")).toASCIIString()));
+					locations.add(new URI(urlString).toURL());
 				} catch (URISyntaxException | MalformedURLException e) {
 					e.printStackTrace();
-					throw new MalformedURLException("Invalid license URL -- ignoring");
+					throw new MalformedURLException("Invalid license URL:");
 				}
 			} catch (MalformedURLException mue) {
 				mue.printStackTrace();
@@ -691,18 +691,25 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 					if (location == null) {
 						throw new SecurityException("No redirect location given.");
 					}
-					URL target = new URL(base, location);
-					String protocol = target.getProtocol();
-					if (!(protocol.equals("http") || protocol.equals("https"))) {
-						throw new SecurityException("Redirect supported to http and https protocols only, but found '" + protocol
-								+ "'");
+					try {
+						URI baseUri = base.toURI();
+						URI locationUri = new URI(location);
+						URI targetUri = baseUri.resolve(locationUri);
+						URL target = targetUri.toURL();
+						String protocol = target.getProtocol();
+						if (!(protocol.equals("http") || protocol.equals("https"))) {
+							throw new SecurityException("Redirect supported to http and https protocols only, but found '" + protocol + "'");
+						}
+						url = target;
+					} catch (URISyntaxException e) {
+						e.printStackTrace();
+						System.err.println("Problem opening connection at redirect. Skipping...");
 					}
-					url = target;
 				} else {
 					return c;
 				}
 			}
-			throw new SecurityException("More than five redirects, aborting");
+			throw new SecurityException("More than " + maxRedirects + " redirects. Aborting...");
 		}
 
 		public void run() {
