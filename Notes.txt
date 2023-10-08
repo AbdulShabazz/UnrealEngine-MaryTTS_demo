@@ -45,7 +45,7 @@ NoiseGPT (Content Creation Tool)
 
 Methods: Deep Learning Models, Concatenative Speech, Statistical Parametric Methods
 
-Note: Rather than employing a filter for each phone, instead employ a specialized transition filter which generates partial phone pairs which match at optimal zero-crossings to support concatenation (eg. "apple ":null-a,a-p,p-p,p-l,l-null)
+Note: Rather than employing a filter for each phone, instead employ a specialized transition filter which generates partial phone pairs which match at optimal zero-crossings to support concatenation (eg. "apple ":null-a,a-p,p-p,p-l,l-null)(ie.diphones; cf.triphones)
 
 Speech Synthesis 2
 
