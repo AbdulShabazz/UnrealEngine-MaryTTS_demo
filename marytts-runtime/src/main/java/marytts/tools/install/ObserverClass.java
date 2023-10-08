@@ -4,25 +4,25 @@ package marytts.tools.install;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ObserverClass {
+public class ObserverClass<T> {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    private int data;
+    private T data;
 
-    public int getData() {
+    public T GetData() {
         return data;
     }
 
-    public void setData(int newData) {
-        int oldData = this.data;
+    public synchronized void SetDataAndFirePropertyChange(T newData) {
+        T oldData = this.data;
         this.data = newData;
         support.firePropertyChange("data", oldData, newData);
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    public synchronized void AddPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    public synchronized void RemovePropertyChangeListener(PropertyChangeListener listener) {
         support.removePropertyChangeListener(listener);
     }
 }
