@@ -4,7 +4,7 @@ package marytts.tools.install;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ObserverClass<T> {
+public class ObserverThreadSafeClass<T> {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private T data;
 

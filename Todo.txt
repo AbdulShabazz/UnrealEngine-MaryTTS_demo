@@ -1,2 +1,3 @@
 TODO: Improve cross-fade quality between phones (by increasing frame resolution) to improve prosody
 TODO: Add respeecher support for (offline) voice-mapping
+TODO: Refactor the MaryTTS demo to utilize our thread-safe ObserverThreadSafeClass
