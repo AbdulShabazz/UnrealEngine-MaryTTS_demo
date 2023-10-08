@@ -1,3 +1,5 @@
-TODO: Improve cross-fade quality between phones (by increasing frame resolution) to improve prosody
+TODO: Improve cross-fade quality between phones (by increasing interframe connective resolution options) to improve prosody
 TODO: Add respeecher support for (offline) voice-mapping
 TODO: Refactor the MaryTTS demo to utilize our thread-safe ObserverThreadSafeClass
+TODO: OPTION 1: Initially support phonetic spelling as a patch for choosing intonation or prosodic character just from text input, arbitrary text (eg. blaarp, froozle, dkskjbas) and heterphonic homographs (eg. tear, bow)
+TODO: OPTION 2: Fully Support gTTS and remap the generated .mp3 to our internal (phone) library. 
