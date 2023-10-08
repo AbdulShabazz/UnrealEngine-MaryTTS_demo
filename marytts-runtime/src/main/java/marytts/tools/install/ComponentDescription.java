@@ -375,7 +375,7 @@ public class ComponentDescription extends Observable implements Comparable<Compo
 	// Notify observers that this download's status has changed.
 	private void stateChanged() {
 		setChanged();
-		notifyObservers();
+		notifyObservers(this);
 	}
 
 	/**
