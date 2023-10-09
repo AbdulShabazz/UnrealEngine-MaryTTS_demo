@@ -4,6 +4,10 @@ FILES
 - .VOICE files contain lang-specific phones-, accent-
 - .GROOVY files (cf. .bat files)
 - .GRADLE files (cf. cmake)
+- .WAV files are (hgh fidelilty lossless) audio files (Windows)
+- .FLAC files are (hgh fidelilty lossless) audio files (Mac)
+- .MP3 are platform independant (compresssed lossy) audio files
+- .code-workspace is an optional workspace viewer for Visual Studio Code
 
 Speech Synthesis 1
 
