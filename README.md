@@ -26,7 +26,7 @@ A running MaryTTS server needs to be restarted before the new voices can be used
 
 [![CI](https://github.com/marytts/marytts/actions/workflows/main.yml/badge.svg)](https://github.com/marytts/marytts/actions/workflows/main.yml)
 
-*# MaryTTS
+## MaryTTS
 
 This is the source code repository for the multilingual open-source MARY text-to-speech platform (MaryTTS).
 MaryTTS is a client-server system written in pure Java, so it runs on many platforms.
