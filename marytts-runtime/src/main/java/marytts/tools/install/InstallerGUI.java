@@ -32,6 +32,8 @@ import java.io.StringWriter;
 import java.net.Authenticator;
 import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,11 +88,12 @@ public class InstallerGUI extends javax.swing.JFrame implements VoiceUpdateListe
 
 	public void setAndUpdateFromMaryComponentURL(String maryComponentURL) {
 		try {
-			URL url = new URL(maryComponentURL);
-			// if this doesn't fail then it's OK, we can set it
+			URI uri = new URI(maryComponentURL);
+			/*URL url =*/ uri.toURL();
+			// if the above doesn't fail then it's OK, we can set it
 			tfComponentListURL.setText(maryComponentURL);
 			updateFromMaryComponentURL();
-		} catch (MalformedURLException e) {
+		} catch (MalformedURLException | URISyntaxException e) {
 			// ignore, treat as unset value
 		}
 	}
@@ -377,7 +380,8 @@ public class InstallerGUI extends javax.swing.JFrame implements VoiceUpdateListe
 	private void updateFromMaryComponentURL() throws HeadlessException {
 		String urlString = tfComponentListURL.getText().trim().replaceAll(" ", "%20");
 		try {
-			URL url = new URL(urlString);
+			URI uri = new URI(urlString);
+			URL url = uri.toURL();
 			InstallFileParser p = new InstallFileParser(url);
 			addLanguagesAndVoices(p);
 		} catch (Exception e) {
