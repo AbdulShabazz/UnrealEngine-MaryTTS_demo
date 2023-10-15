@@ -1,50 +1,62 @@
-import groovy.xml.StreamingMarkupBuilder
-import groovy.xml.XmlUtil
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.OutputFiles
-import org.gradle.api.tasks.TaskAction
+import groovy.xml.StreamingMarkupBuilder;
+import groovy.xml.XmlUtil;
+import org.gradle.api.DefaultTask;
+import org.gradle.api.provider.ListProperty;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.OutputFiles;
+import org.gradle.api.tasks.TaskAction;
 
-class GenerateComponentXmlDescriptor extends DefaultTask {
+import java.io.File;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
-    @Input
-    List<Locale> locales
+public class GenerateComponentXmlDescriptor extends DefaultTask {
 
-    @OutputFiles
-    List<File> xmlFiles
+    // Use ListProperty for Gradle's property type
+    private final ListProperty<Locale> locales = getProject().getObjects().listProperty(Locale.class);
 
-    void setLocales(String... localeStrs) {
-        locales = localeStrs.collect {
-            Locale.forLanguageTag(it)
-        }
+    // Use ListProperty for Gradle's property type
+    private final ListProperty<File> xmlFiles = getProject().getObjects().listProperty(File.class);
+
+    // Setter for locales
+    public void setLocales(String... localeStrs) {
+        locales.set(List.of(localeStrs).stream()
+                .map(Locale::forLanguageTag)
+                .collect(Collectors.toList()));
     }
 
-    List<File> getXmlFiles() {
-        locales.collect { locale ->
-            new File(project.buildDir, "marytts-lang-$locale-$project.version-component.xml")
-        }
+    // Getter for xmlFiles
+    public ListProperty<File> getXmlFiles() {
+        return xmlFiles;
     }
 
-    GenerateComponentXmlDescriptor() {
-        def localeStr = project.name.replaceAll(~/marytts-lang-(.+).*/) { all, localeStr ->
-            localeStr
-        }
-        locales = [Locale.forLanguageTag(localeStr)]
+    // Constructor
+    public GenerateComponentXmlDescriptor() {
+        String localeStr = getProject().getName().replaceAll("marytts-lang-(.+).*", "${1}");
+        locales.set(List.of(Locale.forLanguageTag(localeStr)));
     }
 
+    // Task action to generate XML
     @TaskAction
-    void generate() {
-        [locales, getXmlFiles()].transpose().each { locale, xmlFile ->
-            def xmlStr = new StreamingMarkupBuilder().bind {
-                'marytts-install'(xmlns: 'http://mary.dfki.de/installer') {
-                    language(locale: "$locale", name: locale.toLanguageTag(), version: project.version) {
-                        delegate.description("${locale.getDisplayName(Locale.US)} language component")
-                        license(href: 'http://www.gnu.org/licenses/lgpl-3.0-standalone.html')
-                        'package'(filename: "marytts-lang-$locale-${project.version}.zip", md5sum: 'dummy', size: 0)
-                    }
-                }
-            }
-            xmlFile.text = XmlUtil.serialize(xmlStr)
-        }
+    public void generate() {
+        List<List<Object>> combined = List.of(locales.get(), xmlFiles.get());
+        combined.get(0).stream()
+                .forEach(index -> {
+                    Locale locale = (Locale) combined.get(0).get((int)index);
+                    File xmlFile = (File) combined.get(1).get((int)index);
+
+                    String xmlStr = new StreamingMarkupBuilder().bind {
+                        'marytts-install'(xmlns: 'http://mary.dfki.de/installer') {
+                            language(locale: "$locale", name: locale.toLanguageTag(), version: getProject().getVersion()) {
+                                delegate.description("${locale.getDisplayName(Locale.US)} language component");
+                                license(href: 'http://www.gnu.org/licenses/lgpl-3.0-standalone.html');
+                                'package'(filename: "marytts-lang-$locale-${getProject().getVersion()}.zip", md5sum: 'dummy', size: 0);
+                            }
+                        }
+                    };
+                    xmlFile.setText(XmlUtil.serialize(xmlStr));
+                });
     }
 }
+
