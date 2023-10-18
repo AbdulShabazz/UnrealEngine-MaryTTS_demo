@@ -28,6 +28,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author marc
+ * @contributor AbdulShabazz
  */
 public class RussianConfigExtraTest {
     private static final Locale RUSSIAN = new Locale.Builder().setLanguage("ru").build();
@@ -41,7 +42,13 @@ public class RussianConfigExtraTest {
 
     @Test
     public void hasRussianLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new RussianConfig();
+        Assert.assertTrue(e.getLocales().contains(RUSSIAN));
+        */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(RUSSIAN);
+        LanguageConfig e = (LanguageConfig) m;
         Assert.assertTrue(e.getLocales().contains(RUSSIAN));
     }
 }
