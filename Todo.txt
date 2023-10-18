@@ -3,4 +3,4 @@ TODO: Add respeecher support for (offline) voice-mapping
 TODO: Refactor the MaryTTS demo to utilize our thread-safe ObserverThreadSafeClass
 TODO: OPTION 1: Initially support phonetic spelling as a patch for choosing intonation or rhythm or prosodic character just from text input, arbitrary text (eg. blaarp, froozle, dkskjbas) and heterphonic homographs (eg. tear, bow)
 TODO: OPTION 2: Fully Support gTTS and remap the generated .mp3 to our internal (phone) library. 
-TODO: OPTION 3: Formant modulation levels (eg. F0--F5) can be regulated by the flow of phonemes through a state-machine (to adjust F0-F5 attack, decay,signal shape) for smoother (eg. vowels, consonants, diphthongs, etc.) transitions between phones, similar to Deepmind's WaveNet and Tacotron based on WaveNet
+TODO: OPTION 3: Formant modulation levels (eg. F0--F5) can be regulated by the flow of phonemes (modeled as signal transition keyframes) sent through a state-machine (to adjust F0-F5 attack, decay, signal shape, etc.) for smoother (eg. vowels, consonants, diphthongs, etc.) transitions between phones, similar to Deepmind's WaveNet and Tacotron based on WaveNet
