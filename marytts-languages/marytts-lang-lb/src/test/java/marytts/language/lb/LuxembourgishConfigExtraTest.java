@@ -32,7 +32,7 @@ import org.testng.annotations.*;
  * @author marc
  */
 public class LuxembourgishConfigExtraTest {
-    private static final Locale LUXEMBOURGISH = new Locale("lb");
+    private static final Locale LUXEMBOURGISH = new Locale.Builder().setLanguage("lb").build();
 
     @Test
     public void canGet() {
