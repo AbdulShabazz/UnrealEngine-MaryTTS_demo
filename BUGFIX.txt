@@ -9,3 +9,20 @@ SOLU:
 	2. Add bin/gradle to PATH
 
 SYMP: build.gradle:2 Plugin [id: 'de.dfki.mary.component', version: '0.2'] was not found in any of the following sources:
+????
+
+SYMP: Cycle detected in gradle build...
+SOLU: 
+	1. 
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+
+	2.
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
