@@ -41,7 +41,14 @@ public class ItalianConfigExtraTest {
 
     @Test
     public void hasItalianLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new ItalianConfig();
         Assert.assertTrue(e.getLocales().contains(Locale.ITALIAN));
+         */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(Locale.ITALIAN);
+        LanguageConfig e = (LanguageConfig) m;
+        Assert.assertTrue(e.getLocales().contains(Locale.ITALIAN));
+
     }
 }
