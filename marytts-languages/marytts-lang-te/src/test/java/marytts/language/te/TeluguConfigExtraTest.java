@@ -43,7 +43,13 @@ public class TeluguConfigExtraTest {
 
     @Test
     public void hasTeluguLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new TeluguConfig();
+        Assert.assertTrue(e.getLocales().contains(TELUGU));
+        */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(TELUGU);
+        LanguageConfig e = (LanguageConfig) m;
         Assert.assertTrue(e.getLocales().contains(TELUGU));
     }
 }
