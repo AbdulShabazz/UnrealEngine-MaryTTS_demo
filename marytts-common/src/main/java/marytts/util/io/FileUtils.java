@@ -48,7 +48,7 @@ import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
+//import javax.sound.sampled.UnsupportedAudioFileException;
 
 import marytts.util.MaryUtils;
 import marytts.util.string.StringUtils;
@@ -442,19 +442,17 @@ public class FileUtils {
 	}
 
 	public static void copy(File source, File dest) throws IOException {
-		FileChannel in = null, out = null;
-		try {
+		try (FileInputStream inStream = new FileInputStream(source);
+			 FileOutputStream outStream = new FileOutputStream(dest)) {
 			System.out.println("copying: " + source + "\n    --> " + dest);
-			in = new FileInputStream(source).getChannel();
-			out = new FileOutputStream(dest).getChannel();
-			MappedByteBuffer buf = in.map(FileChannel.MapMode.READ_ONLY, 0, in.size());
-			out.write(buf);
+			FileChannel inChannel = inStream.getChannel();
+			FileChannel outChannel = outStream.getChannel();
+			MappedByteBuffer buf = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, inChannel.size());
+			outChannel.write(buf);
 		} catch (Exception e) {
 			System.out.println("Error copying file " + source.getAbsolutePath() + " to " + dest.getAbsolutePath() + " : "
 					+ e.getMessage());
 			throw new IOException();
-		} finally {
-			FileUtils.close(in, out);
 		}
 	}
 
@@ -488,7 +486,7 @@ public class FileUtils {
 	// this function does not copy files that start with .
 	public static void copyFolderRecursive(String sourceFolder, String targetFolder, boolean bForceDeleteTarget)
 			throws IOException {
-		String fileSeparator = System.getProperty("file.separator");
+		//String fileSeparator = System.getProperty("file.separator");
 		if (exists(sourceFolder)) {
 			if (exists(targetFolder) && bForceDeleteTarget)
 				delete(targetFolder);
