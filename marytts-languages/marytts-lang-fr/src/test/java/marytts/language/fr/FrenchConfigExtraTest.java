@@ -29,6 +29,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author marc
+ * @author AbdulShabazz
  */
 public class FrenchConfigExtraTest {
 
@@ -41,7 +42,13 @@ public class FrenchConfigExtraTest {
 
     @Test
     public void hasFrenchLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new FrenchConfig();
+        Assert.assertTrue(e.getLocales().contains(Locale.FRENCH));
+         */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(Locale.FRENCH);
+        LanguageConfig e = (LanguageConfig) m;
         Assert.assertTrue(e.getLocales().contains(Locale.FRENCH));
     }
 }
