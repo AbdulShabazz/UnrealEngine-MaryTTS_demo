@@ -210,8 +210,8 @@ public class Voice {
 		}
 		preferredModulesClasses = MaryProperties.getProperty(header + ".preferredModules");
 
-		String lexiconClass = MaryProperties.getProperty(header + ".lexiconClass");
-		String lexiconName = MaryProperties.getProperty(header + ".lexicon");
+		//String lexiconClass = MaryProperties.getProperty(header + ".lexiconClass");
+		//String lexiconName = MaryProperties.getProperty(header + ".lexicon");
 		vocalizationSupport = MaryProperties.getBoolean(header + ".vocalizationSupport", false);
 		if (vocalizationSupport) {
 			vocalizationSynthesizer = new VocalizationSynthesizer(this);
