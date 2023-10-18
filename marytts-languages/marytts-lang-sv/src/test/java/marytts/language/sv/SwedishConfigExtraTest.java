@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
  */
 public class SwedishConfigExtraTest {
 
-    private static final Locale SWEDISH = new Locale("sv");
+    private static final Locale SWEDISH = new Locale.Builder().setLanguage("sv").build(); 
 
     @Test
     public void canGet() {
