@@ -30,8 +30,12 @@ import org.testng.annotations.Test;
 
 /**
  * @author marc
+ * @contributor AbdulShabazz
  */
 public class EnglishConfigExtraTest {
+
+    private static final Locale ENGLISH = Locale.US;
+    private static final Locale ENGLISH_UK = Locale.UK;
 
     @Test
     public void haveLanguageConfig() {
@@ -47,9 +51,9 @@ public class EnglishConfigExtraTest {
 
     @Test
     public void canGet() {
-        MaryConfig m = MaryConfig.getLanguageConfig(Locale.US);
+        MaryConfig m = MaryConfig.getLanguageConfig(ENGLISH);
         Assert.assertNotNull(m);
-        Assert.assertTrue(((LanguageConfig) m).getLocales().contains(Locale.US));
+        Assert.assertTrue(((LanguageConfig) m).getLocales().contains(ENGLISH));
     }
 
     @Test
@@ -59,9 +63,9 @@ public class EnglishConfigExtraTest {
         Assert.assertTrue(e.getLocales().contains(Locale.US));
         */
 
-        MaryConfig m = MaryConfig.getLanguageConfig(Locale.US);
+        MaryConfig m = MaryConfig.getLanguageConfig(ENGLISH);
         LanguageConfig e = (LanguageConfig) m;
-        Assert.assertTrue(e.getLocales().contains(Locale.US));
+        Assert.assertTrue(e.getLocales().contains(ENGLISH));
     }
 
     @Test
@@ -72,8 +76,8 @@ public class EnglishConfigExtraTest {
         Assert.assertNotNull(e.getAllophoneSet(Locale.UK));
          */
 
-        AllophoneSet aUS = LanguageConfig.getAllophoneSet(Locale.US);
-        AllophoneSet aUK = LanguageConfig.getAllophoneSet(Locale.UK);
+        AllophoneSet aUS = LanguageConfig.getAllophoneSet(ENGLISH);
+        AllophoneSet aUK = LanguageConfig.getAllophoneSet(ENGLISH_UK);
 
         Assert.assertNotNull(aUS);
         Assert.assertNotNull(aUK);
