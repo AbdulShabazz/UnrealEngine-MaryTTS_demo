@@ -22,6 +22,7 @@ import java.util.Locale;
 
 import marytts.config.LanguageConfig;
 import marytts.config.MaryConfig;
+import marytts.modules.phonemiser.AllophoneSet;
 import marytts.exceptions.MaryConfigurationException;
 
 import org.testng.Assert;
@@ -53,14 +54,28 @@ public class EnglishConfigExtraTest {
 
     @Test
     public void hasEnglishLocale() throws MaryConfigurationException {
-        LanguageConfig e = new EnglishConfig();
+        /*
+        EnglishConfig e = EnglishConfig();
+        Assert.assertTrue(e.getLocales().contains(Locale.US));
+        */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(Locale.US);
+        LanguageConfig e = (LanguageConfig) m;
         Assert.assertTrue(e.getLocales().contains(Locale.US));
     }
 
     @Test
     public void hasAllophoneSet() throws MaryConfigurationException {
-        LanguageConfig e = new EnglishConfig();
+        /* 
+        EnglishConfig e = EnglishConfig();
         Assert.assertNotNull(e.getAllophoneSet(Locale.US));
         Assert.assertNotNull(e.getAllophoneSet(Locale.UK));
+         */
+
+        AllophoneSet aUS = LanguageConfig.getAllophoneSet(Locale.US);
+        AllophoneSet aUK = LanguageConfig.getAllophoneSet(Locale.UK);
+
+        Assert.assertNotNull(aUS);
+        Assert.assertNotNull(aUK);
     }
 }
