@@ -42,7 +42,13 @@ public class SwedishConfigExtraTest {
 
     @Test
     public void hasSwedishLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new SwedishConfig();
+        Assert.assertTrue(e.getLocales().contains(SWEDISH));
+        */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(SWEDISH);
+        LanguageConfig e = (LanguageConfig) m;
         Assert.assertTrue(e.getLocales().contains(SWEDISH));
     }
 }
