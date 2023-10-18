@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
  */
 public class TurkishConfigExtraTest {
 
-    private static final Locale TURKISH = new Locale("tr");
+    private static final Locale TURKISH = new Locale.Builder().setLanguage("tr").build();
 
     @Test
     public void canGet() {
