@@ -30,6 +30,7 @@ import org.testng.annotations.*;
 
 /**
  * @author marc
+ * @contributor AbdulShabazz
  */
 public class LuxembourgishConfigExtraTest {
     private static final Locale LUXEMBOURGISH = new Locale.Builder().setLanguage("lb").build();
@@ -43,7 +44,13 @@ public class LuxembourgishConfigExtraTest {
 
     @Test
     public void hasLuxembourgishLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new LuxembourgishConfig();
+        assertTrue(e.getLocales().contains(LUXEMBOURGISH));
+        */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(LUXEMBOURGISH);
+        LanguageConfig e = (LanguageConfig) m;
         assertTrue(e.getLocales().contains(LUXEMBOURGISH));
     }
 }
