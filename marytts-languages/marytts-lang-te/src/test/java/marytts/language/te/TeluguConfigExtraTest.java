@@ -23,6 +23,7 @@ import java.util.Locale;
 import marytts.config.LanguageConfig;
 import marytts.config.MaryConfig;
 import marytts.exceptions.MaryConfigurationException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,7 +32,7 @@ import org.testng.annotations.Test;
  */
 public class TeluguConfigExtraTest {
 
-    private static final Locale TELUGU = new Locale("te");
+    private static final Locale TELUGU = new Locale.Builder().setLanguage("te").build();
 
     @Test
     public void canGet() {
