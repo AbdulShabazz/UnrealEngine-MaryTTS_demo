@@ -43,7 +43,12 @@ public class TurkishConfigExtraTest {
 
     @Test
     public void hasTurkishLocale() throws MaryConfigurationException {
+        /* 
         LanguageConfig e = new TurkishConfig();
+        Assert.assertTrue(e.getLocales().contains(TURKISH)); */
+
+        MaryConfig m = MaryConfig.getLanguageConfig(TURKISH);
+        LanguageConfig e = (LanguageConfig) m;
         Assert.assertTrue(e.getLocales().contains(TURKISH));
     }
 }
