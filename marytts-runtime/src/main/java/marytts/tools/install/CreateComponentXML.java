@@ -23,6 +23,7 @@ package marytts.tools.install;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -176,10 +177,10 @@ public class CreateComponentXML {
 		System.out.println();
 		System.out.println();
 
-		// Now go through the zip files and try to create suitable component descriptions
-		Set<ComponentDescription> newDescriptions = new TreeSet<ComponentDescription>();
+		// Now go through the zip files and try to create suitable component descriptions.Iff it works, write the XML.
+		/*Set<ComponentDescription> newDescriptions =*/ new TreeSet<ComponentDescription>();
 		Set<Locale> existingLocales = new HashSet<Locale>(Arrays.asList(Locale.getAvailableLocales()));
-		existingLocales.add(new Locale("te")); // Telugu
+		existingLocales.add(Locale.forLanguageTag("te")); // Telugu
 		for (File zip : zips) {
 			String name;
 			String version;
@@ -225,7 +226,7 @@ public class CreateComponentXML {
 					vcd.setType("unknown");
 					vcd.setDependsLanguage("unknown");
 					vcd.setDependsVersion(version);
-					vcd.setLocale(new Locale("unknown"));
+					vcd.setLocale(Locale.forLanguageTag("und")); // "und" stands for "undetermined"
 				}
 				cd = vcd;
 			}
@@ -243,11 +244,14 @@ public class CreateComponentXML {
 			} else { // need to guess
 				cd.setDescription(" ");
 				if (isLanguageComponent) { // assume LGPL
-					cd.setLicenseURL(new URL("http://www.gnu.org/licenses/lgpl-3.0-standalone.html"));
+					URI licenseURI = new URI("http://www.gnu.org/licenses/lgpl-3.0-standalone.html");
+					cd.setLicenseURL(licenseURI.toURL());
 				} else { // voice, assume by-nd
-					cd.setLicenseURL(new URL("http://mary.dfki.de/download/by-nd-3.0.html"));
+					URI licenseURI = new URI("http://mary.dfki.de/download/by-nd-3.0.html");
+					cd.setLicenseURL(licenseURI.toURL());
 				}
-				cd.addLocation(new URL("http://mary.dfki.de/download/" + version + "/" + filename));
+				URI locationURI = new URI("http://mary.dfki.de/download/" + version + "/" + filename);
+				cd.addLocation(locationURI.toURL());
 			}
 			// Now get the XML description to the right place:
 			Document oneXML = cd.createComponentXML();
@@ -264,7 +268,7 @@ public class CreateComponentXML {
 				}
 			}
 		}
-		if (!writeIndividualXML && allXML != null) {
+		if (!writeIndividualXML && (allXML != null) && (outputFile != null)) {
 			DomUtils.document2File(allXML, outputFile);
 			System.out.println("Wrote " + outputFile.getPath());
 		}
