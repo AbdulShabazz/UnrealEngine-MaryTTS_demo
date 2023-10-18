@@ -18,6 +18,7 @@ run {
     if ("socket.addr" in System.properties) {
         systemProperties << ['socket.addr': System.properties["socket.addr"]]
     }
+
     if ("socket.port" in System.properties) {
         systemProperties << ['socket.port': System.properties["socket.port"]]
     }
@@ -26,6 +27,7 @@ run {
     if (logger.isEnabled(LogLevel.INFO)) {
         systemProperties << ['log4j.logger.marytts': 'INFO,stderr']
     }
+
     if (logger.isEnabled(LogLevel.DEBUG)) {
         systemProperties << ['log4j.logger.marytts': 'DEBUG,stderr']
     }
@@ -34,7 +36,6 @@ run {
     if ("log4j.logger.marytts" in System.properties) {
         systemProperties << ["log4j.logger.marytts": System.properties["log4j.logger.marytts"]]
     }
-
 
     doFirst {
         classpath += fileTree(installDist.destinationDir).include('lib/voice-*.jar', 'lib/marytts-lang-*.jar')
