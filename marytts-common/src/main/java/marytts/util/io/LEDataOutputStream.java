@@ -61,7 +61,7 @@ public class LEDataOutputStream implements DataOutput {
 	 * 
 	 * @noinspection UnusedDeclaration
 	 */
-	private static final String EMBEDDEDCOPYRIGHT = "copyright (c) 1999-2007 Roedy Green, Canadian Mind Products, http://mindprod.com";
+	//private static final String EMBEDDEDCOPYRIGHT = "copyright (c) 1999-2007 Roedy Green, Canadian Mind Products, http://mindprod.com";
 
 	/**
 	 * to get at big-Endian write methods of DataOutPutStream.
@@ -297,6 +297,12 @@ public class LEDataOutputStream implements DataOutput {
 		writeInt(Float.floatToIntBits(v));
 	}
 
+	/**
+	 * @param v
+	 * @param startPos
+	 * @param len
+	 * @throws IOException
+	 */
 	public final void writeFloat(float[] v, int startPos, int len) throws IOException {
 		// this will always fire, since 0 + v.length never be > v.length!
 		// TODO remove this assert:
