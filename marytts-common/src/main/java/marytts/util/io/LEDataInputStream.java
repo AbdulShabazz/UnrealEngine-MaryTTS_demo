@@ -48,7 +48,7 @@ public class LEDataInputStream implements DataInput {
 	 * 
 	 * @noinspection UnusedDeclaration
 	 */
-	private static final String EMBEDDEDCOPYRIGHT = "copyright (c) 1999-2007 Roedy Green, Canadian Mind Products, http://mindprod.com";
+	//private static final String EMBEDDEDCOPYRIGHT = "copyright (c) 1999-2007 Roedy Green, Canadian Mind Products, http://mindprod.com";
 
 	/**
 	 * to get at the big-Endian methods of a basic DataInputStream
