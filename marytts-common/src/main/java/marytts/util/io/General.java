@@ -511,7 +511,7 @@ public class General {
 	public static void launchProc(String cmdLine, String task, String baseName) {
 
 		Process proc = null;
-		String line = null;
+		//String line = null;
 		// String[] cmd = null; // Java 5.0 compliant code
 
 		try {
@@ -523,7 +523,13 @@ public class General {
 			/* proc = pb.start(); */
 
 			/* Java 1.0 equivalent: */
-			proc = Runtime.getRuntime().exec(cmdLine);
+			//proc = Runtime.getRuntime().exec(cmdLine);
+
+			//ProcessBuilder pb = new ProcessBuilder(cmdLine.split(" "));
+			//Process process = pb.start();
+
+			ProcessBuilder pb = new ProcessBuilder(cmdLine.split(" "));
+			proc = pb.start();
 
 			/* Collect stdout and send it to System.out: */
 			InputStream procStdOut = proc.getInputStream();
@@ -571,7 +577,7 @@ public class General {
 
 		Process proc = null;
 		Process proctmp = null;
-		BufferedReader procStdout = null;
+		//BufferedReader procStdout = null;
 		String line = null;
 		String tmpFile = filedir + "tmp.bat";
 		System.out.println("Running: " + cmdLine);
@@ -583,7 +589,12 @@ public class General {
 			tmp.close();
 
 			/* make it executable... */
-			proctmp = Runtime.getRuntime().exec("chmod +x " + tmpFile);
+			//proctmp = Runtime.getRuntime().exec("chmod +x " + tmpFile);
+
+			/* make it executable... */
+			ProcessBuilder pb = new ProcessBuilder("chmod +x " + tmpFile);
+			proctmp = pb.start();
+
 			proctmp.waitFor();
 			if (proctmp.exitValue() != 0) {
 				BufferedReader errReader = new BufferedReader(new InputStreamReader(proctmp.getErrorStream()));
@@ -603,7 +614,10 @@ public class General {
 			/* proc = pb.start(); */
 
 			/* Java 1.0 equivalent: */
-			proc = Runtime.getRuntime().exec(tmpFile);
+			//proc = Runtime.getRuntime().exec(tmpFile);
+
+			/*ProcessBuilder*/ pb = new ProcessBuilder(tmpFile + cmdLine.split(" "));
+			proc = pb.start();
 
 			InputStream procStdOut = proc.getInputStream();
 			InputStream procStdErr = proc.getErrorStream();
