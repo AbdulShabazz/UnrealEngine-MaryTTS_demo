@@ -427,6 +427,10 @@ public class MaryUtils {
 		return (int) Math.round(value);
 	}
 
+	/**
+	 * @param localeString
+	 * @return locale
+	 */
 	public static Locale string2locale(String localeString) {
 		Locale locale = null;
 		StringTokenizer localeST = new StringTokenizer(localeString, "_-");
@@ -439,7 +443,7 @@ public class MaryUtils {
 				variant = localeST.nextToken();
 			}
 		}
-		locale = new Locale(language, country, variant);
+		locale = new Locale.Builder().setLanguage(language).setRegion(country).setVariant(variant).build();
 		return locale;
 	}
 
@@ -745,8 +749,11 @@ public class MaryUtils {
 
 	public static int shellExecute(String strCommand, boolean bDisplayProgramOutput) {
 		Process p = null;
+		ProcessBuilder bp = null;
 		try {
-			p = Runtime.getRuntime().exec(strCommand);
+			bp = new ProcessBuilder(strCommand.split(" "));
+			if (bp != null)
+				p = bp.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -836,8 +843,8 @@ public class MaryUtils {
 	 *            the class to use for the logger name.
 	 * @return getLogger(clazz.getSimpleName())
 	 */
-	public static Logger getLogger(Class clazz) {
-		return getLogger(clazz.getSimpleName());
+	public static Logger getLogger(Class<?> clazz) {
+		return getLogger(clazz.getClass().getSimpleName());
 	}
 
 	/**
