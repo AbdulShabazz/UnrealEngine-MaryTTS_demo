@@ -19,6 +19,11 @@ allprojects {
         mavenCentral()
         jcenter()
     }
+    /* 
+    dependencies {
+        compile group: 'de.dfki.mary', name: 'voice-cmu-slt-hsmm', version: '5.2'
+    } */
+
 }
 
 apply from: 'applicationLogic.gradle'
