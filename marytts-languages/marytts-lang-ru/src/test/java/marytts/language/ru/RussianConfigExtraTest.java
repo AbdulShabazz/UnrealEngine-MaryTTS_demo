@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
  * @author marc
  */
 public class RussianConfigExtraTest {
-    private static final Locale RUSSIAN = new Locale("ru");
+    private static final Locale RUSSIAN = new Locale.Builder().setLanguage("ru").build();
 
     @Test
     public void canGet() {
