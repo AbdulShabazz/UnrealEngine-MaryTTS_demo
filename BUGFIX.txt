@@ -26,3 +26,6 @@ SOLU:
         mavenCentral()
         jcenter()
     }
+
+SYMP: ERROR - The import marytts.voice.CmuSltHsmmConfig cannot be resolved
+SOLU: 
