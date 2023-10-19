@@ -6,11 +6,17 @@
 This is the multilingual open-source MARY text-to-speech platform (MaryTTS).
 MaryTTS is a client-server system written in pure Java, so it runs on any platform that has a Java runtime installed developed for the Unreal Engine 3D graphics game engine.
 
+<img title='Schwa (phoneme) UE Blueprint' style='margin-top:24px;' alt='Schwa (phoneme) UE Blueprint' src='IMG/Schwa.Phoneme.BP.PNG'/><br>
+<span>Schwa (phoneme) UE Blueprint</span>
 
-<img title='Schwa' src='IMG/Schwa.Phoneme.BP.PNG'/>
-<img title='Schwa.Phoneme.Synthesis.Parameters' src='IMG/Phoneme.Synthesis.Parameters.Screen.BP.png'/>
-<img title='Schwa.Phoneme.(Formants).Synthesis.Curves' src='IMG/Phoneme.(Formants).Synthesis.Curves.Screen.PNG'/>
-<img title='Hello World!' src='IMG/Hello.World.BP.2023.png'/>
+<img title='Schwa.Phoneme.Synthesis.Parameters' style='margin-top:24px;' alt='Schwa.Phoneme.Synthesis.Parameters' src='IMG/Phoneme.Synthesis.Parameters.Screen.BP.png'/><br>
+<span>Schwa.Phoneme.Synthesis.Parameters</span>
+
+<img title='Schwa.Phoneme.(Formants).Synthesis.Curves' style='margin-top:24px;' alt='Schwa.Phoneme.(Formants).Synthesis.Curves' src='IMG/Phoneme.(Formants).Synthesis.Curves.Screen.PNG'/><br>
+<span>Schwa.Phoneme.(Formants).Synthesis.Curves</span>
+
+<img title='Hello World!' style='margin-top:24px;' alt='Hello World! (Blueprint)' src='IMG/Hello.World.BP.2023.png'/><br>
+<span>Hello World! UE Blueprint</span>
 
 Please refer to http://mary.dfki.de and https://github.com/marytts/marytts for further details.
 
