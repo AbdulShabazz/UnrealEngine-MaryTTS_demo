@@ -16,7 +16,7 @@ MaryTTS is a client-server system written in pure Java, so it runs on any platfo
 <span>Schwa.Phoneme.(Formants).Synthesis.Curves</span>
 
 <img title='Hello World!' style='margin-top:24px;' alt='Hello World! (Blueprint)' src='IMG/Hello.World.BP.2023.png'/><br>
-<span>Hello World! UE Blueprint</span>
+<span>Hello World! UE Blueprint</span><br><br>
 
 Please refer to http://mary.dfki.de and https://github.com/marytts/marytts for further details.
 
