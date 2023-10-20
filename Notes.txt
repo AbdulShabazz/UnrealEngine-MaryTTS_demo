@@ -81,3 +81,16 @@ Support voice aggregation (chorus), Mechanical
 voices, and other forms if altered voices.
 
 Voice Synthesis can use statistical based signal generation (learned) for the base components and shapes and then rules-based signal generation for the remaining support frequencies in the spectrum.
+
+American English Hello World IPA spelling
+
+    "Hello": /həˈloʊ/
+        /h/ : 'h' (ASCII: 0x68)
+        /ə/ : 'ə' (UTF-8 Hex: 0xC9 0x99)
+        /ˈl/ : 'l' (ASCII: 0x6C)
+        /oʊ/ : 'o' (ASCII: 0x6F) + 'ʊ' (UTF-8 Hex: 0xCA 0x8A)
+    "World": /wɝld/
+        /w/ : 'w' (ASCII: 0x77)
+        /ɝ:/ : 'ɝ:' (UTF-8 Hex: 0xC9 0x9D)
+        /l/ : 'l' (ASCII: 0x6C)
+        /d/ : 'd' (ASCII: 0x64)
