@@ -18,7 +18,7 @@ F2 80 hz
 F3 2.5 khz
 F4 3 khz
 
-Incorporate a spectrogram generator (spectrograph)-, interpreter / analyzer-, and playback engine- to intuitively guide wave synthesis . A wide-band spectrogram (eg. 50 db) reveals nuanced consonant harmonic structure . A narrow-band spectrogram (eg. 30 db) minimizes weak sounds however the harmonic structure of vowels remains visible . The useful bands for speech analysis lies between 25 hz - 400 hz .
+Incorporate a spectrograph (spectrogram generator)-, interpreter- / analyzer-, and playback engine- to intuitively guide wave synthesis . A wide-band spectrogram (eg. 50 db) reveals nuanced consonant harmonic structure . A narrow-band spectrogram (eg. 30 db) minimizes weak sounds however the harmonic structure of vowels remains visible . The useful bands for speech analysis lies between 25 hz - 400 hz .
 
 Max sample rate : 10 ms 
 Harmonic range: 50 hz
@@ -72,6 +72,9 @@ Here are some examples of how event-based formant synthesis can be used to gener
 * **Synthesizing a sentence:** To synthesize a sentence, we can use a parametric formant synthesizer to generate a sequence of formant sequences. Each formant sequence would represent a phoneme in the sentence. The onset of each formant sequence would be triggered by the onset of the corresponding phoneme. The release of each formant sequence would be triggered by the release of the corresponding phoneme.
 * **Synthesizing a word:** To synthesize a word, we can use a parametric formant synthesizer to generate a formant sequence. The formant sequence would represent the phonemes in the word. The onset of the formant sequence would be triggered by the onset of the first phoneme in the word. The release of the formant sequence would be triggered by the release of the last phoneme in the word.
 * **Synthesizing a syllable:** To synthesize a syllable, we can use a parametric formant synthesizer to generate a formant sequence. The formant sequence would represent the phonemes in the syllable. The onset of the formant sequence would be triggered by the onset of the first phoneme in the syllable. The release of the formant sequence would be triggered by the release of the last phoneme in the syllable.
+* ***Phoneme transitions:** This speech synthesis library my require a powerful signal processing framework to synthesize phoneme transitions. 
+Examine, for example, the transition from the phoneme /s/ to the phoneme /t/, the phoneme /s/ is a fricative phoneme and the phoneme /t/ is a plosive phoneme. 
+So the fricative, the plosive, and the transition waveforms would need to be altered.
 
 Overall, event-based formant synthesis is a powerful tool for generating speech signals of arbitrary length. It can be used to synthesize speech for a variety of applications, including text-to-speech systems, speech recognition systems, and speech coding systems.
 
